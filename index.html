@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SMART STUDY HUB</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    /* General Styles */
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #e6f7ff; /* Light blue background for calmness */
+      color: #333;
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* Header */
+    header {
+      background: #0077b6; /* Deep blue for focus */
+      color: white;
+      padding: 1.5rem;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2rem;
+      font-weight: bold;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+      margin: 0;
+      padding: 0;
+    }
+
+    nav a {
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #ffdd57; /* Yellow for highlights */
+    }
+
+    .search-bar {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      max-width: 600px;
+      margin-top: 1rem; /* Move search bar down */
+    }
+
+    .search-bar input {
+      padding: 1rem; /* Bigger padding for larger search bar */
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      margin-right: 0.5rem;
+      width: 100%;
+      font-size: 1rem;
+    }
+
+    .search-bar button {
+      background: #ffdd57; /* Yellow for contrast */
+      color: #333;
+      border: none;
+      padding: 1rem 1.5rem; /* Bigger padding for larger button */
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .search-bar button:hover {
+      background: #ffcc29; /* Darker yellow on hover */
+    }
+
+    .user-profile i {
+      font-size: 1.5rem;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+
+    .user-profile i:hover {
+      transform: scale(1.1);
+    }
+
+    /* Main Content */
+    main {
+      padding: 2rem;
+    }
+
+    /* Study Materials Section */
+    #study-materials {
+      margin-bottom: 2rem;
+    }
+
+    #study-materials h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: #0077b6; /* Deep blue for headings */
+    }
+
+    .materials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .material-card {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      cursor: pointer;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .material-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .material-card h3 {
+      margin: 0;
+      font-size: 1.5rem;
+      color: #0077b6; /* Deep blue for card titles */
+    }
+
+    .material-card p {
+      margin: 0.5rem 0 0;
+      color: #555;
+    }
+
+    /* Daily Quiz Section */
+    #daily-quiz {
+      margin-bottom: 2rem;
+    }
+
+    #daily-quiz h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: #0077b6; /* Deep blue for headings */
+    }
+
+    .quiz-setup {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .quiz-setup label {
+      font-weight: bold;
+      color: #0077b6; /* Deep blue for labels */
+    }
+
+    .quiz-setup select {
+      padding: 0.5rem;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      background: white;
+      color: #333;
+    }
+
+    .quiz-setup button {
+      background: #0077b6; /* Deep blue for buttons */
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .quiz-setup button:hover {
+      background: #005f8b; /* Darker blue on hover */
+    }
+
+    .quiz-container {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    #quiz-question {
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+      color: #0077b6; /* Deep blue for questions */
+    }
+
+    #quiz-options {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    #quiz-options button {
+      padding: 0.5rem;
+      background: #e6f7ff; /* Light blue for options */
+      border: 1px solid #0077b6;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    #quiz-options button:hover {
+      background: #0077b6; /* Deep blue on hover */
+      color: white;
+    }
+
+    #next-question {
+      margin-top: 1rem;
+      padding: 0.5rem 1rem;
+      background: #0077b6; /* Deep blue for buttons */
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    #next-question:hover {
+      background: #005f8b; /* Darker blue on hover */
+    }
+
+    /* Chatbot Icon */
+    #chatbot-icon {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #0077b6; /* Deep blue for chatbot icon */
+      color: white;
+      padding: 1rem;
+      border-radius: 50%;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      animation: bounce 2s infinite;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    #chatbot-icon span {
+      font-size: 1rem;
+      font-weight: bold;
+    }
+
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+      }
+      40% {
+        transform: translateY(-10px);
+      }
+      60% {
+        transform: translateY(-5px);
+      }
+    }
+
+    /* Footer */
+    footer {
+      background: #0077b6; /* Deep blue for footer */
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      margin-top: 2rem;
+    }
+
+    footer p {
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <h1>SMART STUDY HUB</h1>
+    <nav>
+      <ul>
+        <li><a href="#study-materials">Study Materials</a></li>
+        <li><a href="#competitive-exams">Competitive Exams</a></li>
+        <li><a href="#daily-quiz">Daily Quiz</a></li>
+        <li><a href="#performance">Performance</a></li>
+        <li><a href="#premium">Premium</a></li>
+      </ul>
+    </nav>
+    <div class="search-bar">
+      <input type="text" placeholder="Ask a question...">
+      <button><i class="fas fa-search"></i></button>
+    </div>
+    <div class="user-profile">
+      <i class="fas fa-user-circle"></i>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+    <!-- Study Materials Section -->
+    <section id="study-materials">
+      <h2>Study Materials</h2>
+      <div class="materials-grid">
+        <article class="material-card">
+          <h3>Class 1-12</h3>
+          <p>Comprehensive study materials for all subjects.</p>
+        </article>
+        <article class="material-card">
+          <h3>NEET</h3>
+          <p>Prepare for NEET with expert-curated resources.</p>
+        </article>
+        <article class="material-card">
+          <h3>JEE</h3>
+          <p>Master JEE concepts with practice questions.</p>
+        </article>
+        <article class="material-card">
+          <h3>UPSC</h3>
+          <p>Ace UPSC exams with detailed study plans.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Daily Quiz Section -->
+    <section id="daily-quiz">
+      <h2>Daily Quiz</h2>
+      <div class="quiz-setup">
+        <label for="class-select">Select Class:</label>
+        <select id="class-select">
+          <option value="1">Class 1</option>
+          <option value="2">Class 2</option>
+          <!-- Add more classes up to 12 -->
+        </select>
+        <label for="subject-select">Select Subject:</label>
+        <select id="subject-select">
+          <option value="math">Math</option>
+          <option value="science">Science</option>
+          <option value="english">English</option>
+          <!-- Add more subjects -->
+        </select>
+        <button id="start-quiz">Start Quiz</button>
+      </div>
+      <div class="quiz-container hidden">
+        <p id="quiz-question"></p>
+        <div id="quiz-options"></div>
+        <button id="next-question">Next Question</button>
+      </div>
+    </section>
+  </main>
+
+  <!-- Chatbot Icon -->
+  <div id="chatbot-icon">
+    <i class="fas fa-robot"></i>
+    <span>PO</span>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 SMART STUDY HUB. All rights reserved.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
